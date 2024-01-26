@@ -1,4 +1,5 @@
 const allDivs = document.querySelectorAll('.plays')
+const resetButton = document.getElementById('Reset')
 let gameboard =
     ['', '', '',
         '', '', '',
@@ -47,6 +48,8 @@ allDivs.forEach((e) => {
 
         ) {
             Oscore++
+            const resultPlace = document.querySelector('footer')
+            resultPlace.textContent = ""
             return `0 wins`
 
         }
@@ -116,5 +119,22 @@ allDivs.forEach((e) => {
 
     })
 });
+
+
+
+resetButton.addEventListener("click", () => {
+    console.log(allDivs.forEach((e) => {
+        e.textContent = ""
+        gameboard =
+            ['', '', '',
+                '', '', '',
+                '', '', '']
+        let whoseMove = 0
+        const resultPlace = document.querySelector('footer')
+        resultPlace.textContent = ""
+
+    }))
+})
+
 
 
