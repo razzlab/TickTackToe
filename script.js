@@ -1,5 +1,10 @@
 const allDivs = document.querySelectorAll('.plays')
 const resetButton = document.getElementById('Reset')
+const XscoreBoard = document.getElementById('xscoreBoard')
+const OscoreBoard = document.getElementById('oscoreBoard')
+const resultPlace = document.querySelector('footer')
+let round = 0
+
 let gameboard =
     ['', '', '',
         '', '', '',
@@ -29,7 +34,8 @@ allDivs.forEach((e) => {
             ((gameboard[0] === "x") && (gameboard[4] === "x") && (gameboard[8] === "x")) ||
             ((gameboard[2] === "x") && (gameboard[4] === "x") && (gameboard[6] === "x"))
         ) {
-            Xscore++
+
+            XscoreBoard.textContent = Xscore
             return `x wins`
 
 
@@ -47,9 +53,8 @@ allDivs.forEach((e) => {
             ((gameboard[2] === "0") && (gameboard[4] === "0") && (gameboard[6] === "0"))
 
         ) {
-            Oscore++
-            const resultPlace = document.querySelector('footer')
-            resultPlace.textContent = ""
+
+            OscoreBoard.textContent = Oscore
             return `0 wins`
 
         }
@@ -61,6 +66,7 @@ allDivs.forEach((e) => {
 
 
         let selection = e.id
+        console.log(whoseMove)
         if (whoseMove < 9) {
             if (e.textContent === "") {
 
@@ -72,12 +78,17 @@ allDivs.forEach((e) => {
                         whoseMove++
 
                         e.textContent = "x"
-                        if (whosWinner() === undefined) {
+                        if (whoseMove < 9) {
+                            if (whosWinner() === undefined) {
 
+                            } else {
+                                console.log(whosWinner())
+                                Xscore++
+
+                                resultPlace.textContent = whosWinner()
+                            }
                         } else {
-                            console.log(whosWinner())
-                            const resultPlace = document.querySelector('footer')
-                            resultPlace.textContent = whosWinner()
+                            resultPlace.textContent = "It's a tie"
                         }
 
                     }
@@ -87,12 +98,17 @@ allDivs.forEach((e) => {
 
                         whoseMove++
                         e.textContent = "0"
-                        if (whosWinner() === undefined) {
+                        if (whoseMove < 9) {
+                            if (whosWinner() === undefined) {
 
+                            } else {
+                                console.log(whosWinner())
+                                Oscore++
+
+                                resultPlace.textContent = whosWinner()
+                            }
                         } else {
-                            console.log(whosWinner())
-                            const resultPlace = document.querySelector('footer')
-                            resultPlace.textContent = whosWinner()
+                            resultPlace.textContent = "It's a tie"
                         }
 
                     } else {
@@ -114,7 +130,8 @@ allDivs.forEach((e) => {
             }
 
         } else {
-            console.log("its a tie")
+
+            resultPlace.textContent = "It's a tie"
         }
 
     })
@@ -129,8 +146,8 @@ resetButton.addEventListener("click", () => {
             ['', '', '',
                 '', '', '',
                 '', '', '']
-        let whoseMove = 0
-        const resultPlace = document.querySelector('footer')
+        whoseMove = 0
+
         resultPlace.textContent = ""
 
     }))
